@@ -22,6 +22,8 @@ export default function Home() {
     setList(newList)
     setLabel('')
     setTaskIdCounter(taskIdCounter + 1)
+
+    inputTask.value = ''
   }
 
   function handleChangeCheckbox(id) {
@@ -47,9 +49,9 @@ export default function Home() {
   return (
     <div className="flex items-center justify-center w-full min-h-screen bg-slate-950">
       <div className="container px-4 mx-auto">
-        <div className="px-5 py-10 mx-auto rounded bg-slate-800 w-96">
+        <div className="px-5 py-10 min-h-[500px] w-[500px] mx-auto rounded bg-slate-800">
           <div className="flex gap-4 mb-4">
-            <input type="text" className="w-full p-4 text-white border border-green-400 rounded outline-none bg-slate-900"  placeholder="Qual a tarefa ?" onChange={handleChangeInput} />
+            <input type="text" id="inputTask" className="w-full p-4 text-white border border-green-400 rounded outline-none bg-slate-900"  placeholder="Qual a tarefa ?" onChange={handleChangeInput} />
             <button className="px-2 py-4 text-white bg-green-400 rounded hover:bg-green-500" onClick={handleAddTask}>Adicionar</button>
           </div>
           <div className="flex gap-4 mb-4">
@@ -65,11 +67,10 @@ export default function Home() {
             >
               Concluídas {filterTasksByCategory('concluido').length ? <span className="absolute top-0 right-0 w-[20px] h-[20px] text-sm text-white bg-red-500 rounded-[100%]">{filterTasksByCategory('concluido').length}</span> : ''}
             </button>
-            {/* Adicione mais botões/abas para outras categorias, se necessário */}
           </div>
           <div>
-            <ul className="space-y-2">
-              {tasksToShow.length ? tasksToShow.map((item) => (
+            <ul className="space-y-4">
+              {tasksToShow.map((item) => (
                 (
                   <ListItem
                     label={ item.label }
@@ -77,10 +78,9 @@ export default function Home() {
                     onChange={ () => handleChangeCheckbox(item.id) }
                   />
                 )
-              )) 
-              : 
-              <p className="text-center text-white">Lista de tarefas vazia</p>
-              }
+              ))}
+
+              {!filterTasksByCategory('pendente').length && currentCategory === 'pendente' ? <div className="text-center text-white">Lista de tarefas vazia.</div> : ''}
             </ul>
           </div>
         </div>
