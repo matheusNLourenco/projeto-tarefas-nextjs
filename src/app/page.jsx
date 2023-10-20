@@ -13,19 +13,6 @@ export default function Home() {
   const [currentCategory, setCurrentCategory] = useState('pendente');
   const tasksToShow = filterTasksByCategory(currentCategory);
 
-  function handleAddButton() {
-    if(textInput.trim() === '') return
-    
-    setList([
-      ...list,
-      {
-        id: list.length + 1,
-        label: textInput,
-        completed: false
-      }
-    ])
-    setTextInput('')
-  }
 
   function handleChangeCheckbox(id) {
     const updatedList = [...list]
@@ -56,9 +43,10 @@ export default function Home() {
       <div className="container px-4 mx-auto">
         <div className="px-5 py-10 min-h-[500px] w-[500px] mx-auto rounded bg-slate-800">
           <AddBar 
+            list={list}
+            setList={setList}
             textInput={textInput}
             setTextInput={setTextInput}
-            onClick={handleAddButton}
           />
 
           <Tabs 

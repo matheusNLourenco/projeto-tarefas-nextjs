@@ -1,4 +1,18 @@
-export function AddBar({ textInput, setTextInput, onClick }) {
+export function AddBar({ textInput, setTextInput, list, setList }) {
+    function handleAddButton() {
+        if(textInput.trim() === '') return
+        
+        setList([
+          ...list,
+          {
+            id: list.length + 1,
+            label: textInput,
+            completed: false
+          }
+        ])
+        setTextInput('')
+    }
+    
     return (
         <div className="flex gap-4 mb-4">
             <input 
@@ -10,7 +24,7 @@ export function AddBar({ textInput, setTextInput, onClick }) {
             />
             <button 
                 className="px-2 py-4 text-white bg-green-400 rounded hover:bg-green-500" 
-                onClick={ onClick }
+                onClick={ handleAddButton }
             >
                 Adicionar
             </button>
