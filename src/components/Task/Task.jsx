@@ -17,14 +17,15 @@ export function Task({task, list, setList}) {
             showCancelButton: true,
             confirmButtonColor: '#22C55E',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Sim, deletar!'
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Remover'
           }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
                     iconColor: '#22C55E',
-                    title: 'Tarefa deletada com sucesso.',
+                    title: 'Tarefa removida com sucesso.',
                     showConfirmButton: false,
                     timer: 1500
                 })
