@@ -1,3 +1,5 @@
+import Swal from "sweetalert2"
+
 export function Task({task, list, setList}) {
     function handleChangeCheckbox(id) {
         const updatedList = [...list]
@@ -8,8 +10,30 @@ export function Task({task, list, setList}) {
       }
     
     function handleDeleteButton(id) {
-        setList(list.filter((task) => task.id !== id))
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: "Não podera recuperar isso novamente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#22C55E',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, deletar!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    iconColor: '#22C55E',
+                    title: 'Tarefa deletada com sucesso.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
+                setList(list.filter((task) => task.id !== id))
+            }
+          })
     }
+    
     
     return (
         <li className="relative flex items-center justify-between p-2 text-white rounded bg-slate-900">
