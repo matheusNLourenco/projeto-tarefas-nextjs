@@ -1,41 +1,26 @@
 'use client'
 
+import { useState } from "react"
 import { AddBar } from "@/components/AddBar"
 import { BoxList } from "@/components/BoxList"
-import { Info } from "@/components/Info"
 import { Task } from "@/components/Task"
 import { Tabs } from "@/components/Tabs"
-import { useState } from "react"
 
 export default function Home() {
   const [list, setList] = useState([])
-  const [textInput, setTextInput] = useState('')
   const [currentCategory, setCurrentCategory] = useState('pendente');
   const tasksToShow = filterTasksByCategory(currentCategory);
 
-
-  function handleChangeCheckbox(id) {
-    const updatedList = [...list]
-    
-    updatedList.find(task => task.id === id ? task.completed = !task.completed : false)
-    
-    setList(updatedList)
-  }
-
   function filterTasksByCategory(category) {
-    return list.filter((task) => {
-      if (category === "concluido") {
-        return task.completed;
-      } else if (category === "pendente") {
-        return !task.completed;
-      }
-      
-      return true;
-    });
-  }
-
-  function handleDeleteButton(id) {
-    setList(list.filter((task) => task.id !== id))
+      return list.filter((task) => {
+        if (category === "concluido") {
+          return task.completed;
+        } else if (category === "pendente") {
+          return !task.completed;
+        }
+        
+        return true;
+      });
   }
 
   return (
@@ -45,8 +30,6 @@ export default function Home() {
           <AddBar 
             list={list}
             setList={setList}
-            textInput={textInput}
-            setTextInput={setTextInput}
           />
 
           <Tabs 
@@ -60,19 +43,13 @@ export default function Home() {
                 (
                   <Task
                     key={ task.id }
+                    list={list}
+                    setList={setList}
                     task={task}
-                    onChange={ () => handleChangeCheckbox(task.id) }
-                    onClick={ () => handleDeleteButton(task.id) }
                   />
                 )
             ))}
           </BoxList>
-              
-          <Info
-            info='Lista de tarefas vazia.'
-            currentCategory={currentCategory}
-            filterTasksByCategory={filterTasksByCategory}
-          />
         </div>
       </div>
     </div>

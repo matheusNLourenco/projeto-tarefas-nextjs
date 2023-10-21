@@ -1,4 +1,10 @@
-export function AddBar({ textInput, setTextInput, list, setList }) {
+'use client'
+
+import { useState } from "react"
+
+export function AddBar({ list, setList }) {
+    const [textInput, setTextInput] = useState('')
+
     function handleAddButton() {
         if(textInput.trim() === '') return
         
