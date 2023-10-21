@@ -14,6 +14,7 @@ export function Task({task, list, setList}) {
             title: 'Você tem certeza?',
             text: "Não podera recuperar isso novamente!",
             icon: 'warning',
+            iconColor: '#22C55E',
             showCancelButton: true,
             confirmButtonColor: '#22C55E',
             cancelButtonColor: '#d33',
