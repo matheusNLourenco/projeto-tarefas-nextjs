@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from "react"
-import { AddBar } from "@/components/AddBar"
-import { BoxList } from "@/components/BoxList"
-import { Task } from "@/components/Task"
-import { Tabs } from "@/components/Tabs"
+import { AddBar } from "@/app/components/AddBar"
+import { BoxList } from "@/app/components/BoxList"
+import { Task } from "@/app/components/Task"
+import { Tabs } from "@/app/components/Tabs"
 
 export default function Home() {
   const [list, setList] = useState([])
